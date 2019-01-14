@@ -2,6 +2,7 @@
     "name": "GitHub issues submitter",
     "version": "1.0",
     "description": "Submits issues directly to github from the browser window",
+    "key":"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwSa3ZyG4NGeqywcwBmGUtr3SsBVkxGFSu9LFW6pr+NF2JuAY7HggKuizud7Kh6BqoF+iBij5JRJkPst/68aM8n2FgBc0iDhQ/vTHMuEcEF3AruNWSFESmozhTdtHwROpW11taIydms3tBuUpFZxrm1xtgaomBHnZ3IBGH3fYJHXGcM8YVUQeP7x+u9BlNpkazfP/l1ZPE/Pq5pRAPfxI/EXNMoAZU0yDBrA7Wn9/qAVBovnept73il//QPoIuupqvf1QpKbxZwTsBbG4tIOKDtqtClxsLMmWwOvlkZRO4RFC4vrBJ70y6rTUuGvBmZD6kFCxeXEIlcpY1Pg6cny5IwIDAQAB",
     "background": {
         "scripts": ["background.js"],
         "persistent": false
