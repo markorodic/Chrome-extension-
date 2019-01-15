@@ -1,0 +1,30 @@
+{
+  "name": "gh-issue-submitter-extension",
+  "version": "1.0.0",
+  "description": "chrome extension that allows you to submit issues to github repositories",
+  "main": "src/manifest.json",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markorodic/Chrome-extension-.git"
+  },
+  "keywords": [
+    "chrome",
+    "extension",
+    "github",
+    "developer",
+    "tool"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/markorodic/Chrome-extension-/issues"
+  },
+  "homepage": "https://github.com/markorodic/Chrome-extension-#readme",
+  "devDependencies": {
+    "eslint": "^5.12.0",
+    "prettier": "^1.15.3"
+  }
+}
