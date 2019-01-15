@@ -1,54 +1,94 @@
 'use strict';
 
-var config = {
-  apiKey: 'AIzaSyBZbSuKfgpEdnKBwEd0KynG6N3lBZ4mPxs',
-  authDomain: 'github-issue-extension.firebaseapp.com',
-  databaseURL: 'https://github-issue-extension.firebaseio.com',
-  projectId: 'github-issue-extension',
-  storageBucket: 'github-issue-extension.appspot.com',
-  messagingSenderId: '765664737086',
-};
-firebase.initializeApp(config);
+/** Gets Github Authentication token
+ *
+ */
+// chrome.storage.sync.set({ key: myToken }, function() {
+//   console.log('Value is set to ' + myToken);
+// });
+getGithubUserData().then(userData => {
+  console.log('GOT USER DATE', userData);
+});
+// .catch(err => {
+//   console.log(err);
+// }); // === userData;
 
-const provider = new firebase.auth.GithubAuthProvider();
-
-let userData = {
-  userToken: '',
-  user: '',
-};
-
-firebase
-  .auth()
-  .signInWithPopup(provider)
-  .then(function(result) {
-    console.log('successful log in');
-    // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-    const token = result.credential.accessToken;
-    userData.userToken = token;
-    // The signed-in user info.
-    const user = result.user;
-    userData.user = user;
-
-    // makeGithubRequest(token).then(data => {
-    //   console.log(data);
-    // });
-
-    makeIssueRequest(token).then(data => {
-      console.log(data);
+function getGithubUserData() {
+  return new Promise((resolve, reject) => {
+    chrome.storage.sync.get(['ghToken'], function(result) {
+      // || (!result.ghToken.token && !result.ghToken.user)
+      // eslint-disable-next-line
+      if (!!result) {
+        // Case: no gh-token found in storage, prompt firebase for auth
+        promptFirebaseAuth()
+          .then(userData => {
+            resolve(userData);
+          })
+          .catch(err => {
+            reject(err);
+          });
+      } else {
+        resolve(result['ghToken']);
+      }
     });
-  })
-  .catch(function(error) {
-    console.log('Error', error);
-
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    const credential = error.credential;
-    // ...
   });
+}
+
+/**
+ *  prompts Firebase Authentication to get Github authentication credentials
+ *  also saves the github token in chrome.storage
+ *  @returns {Promise}
+ */
+function promptFirebaseAuth() {
+  return new Promise((resolve, reject) => {
+    console.log('invoking authentication with Firebase!!');
+    /**
+     * Initializes our firebase app
+     * NOTE: perhaps we should only do this if we need to authenticate? maybe not
+     */
+    var config = {
+      apiKey: 'AIzaSyBZbSuKfgpEdnKBwEd0KynG6N3lBZ4mPxs',
+      authDomain: 'github-issue-extension.firebaseapp.com',
+      databaseURL: 'https://github-issue-extension.firebaseio.com',
+      projectId: 'github-issue-extension',
+      storageBucket: 'github-issue-extension.appspot.com',
+      messagingSenderId: '765664737086',
+    };
+    firebase.initializeApp(config);
+
+    const provider = new firebase.auth.GithubAuthProvider();
+
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(function(result) {
+        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+        // TODO: other things on result that are interesting:
+        // expirationTime
+        // refreshToken
+        const userData = {
+          token: result.credential.accessToken,
+          displayName: result.user.displayName,
+        };
+
+        console.log(userData);
+
+        chrome.storage.sync.set({ ghToken: userData }, function() {
+          console.log('saved userData:', JSON.stringify(userData));
+          resolve(userData);
+        });
+      })
+      .catch(function(error) {
+        console.error('FAILED LOGIN WITH GITHUB');
+        reject({
+          errorCode: error.code,
+          errorMessage: error.message,
+          email: error.email, // The email of the user's account used.
+          credential: error.credential, // The firebase.auth.AuthCredential type that was used.
+        });
+      });
+  });
+}
 
 function makeGithubRequest(token) {
   const baseUrl = `https://api.github.com/graphql?access_token=${token}`;
