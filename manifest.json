@@ -19,7 +19,11 @@
         "default_popup": "popup.html"
     }, 
     "permissions": [
-        "identity"
+        "identity",
+        "https://*.github.com/*",
+        "https://api.github.com/users/octocat/orgs",
+        "https://jsonplaceholder.typicode.com/todos/1",
+        "http://jsonplaceholder.typicode.com/todos/1"
     ],
-    "content_security_policy": "script-src 'self' https://apis.google.com https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'"
+    "content_security_policy": "script-src 'self' https://jsonplaceholder.typicode.com/todos/1 https://apis.google.com https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'"
 }

@@ -27,7 +27,11 @@ firebase
     // The signed-in user info.
     const user = result.user;
     userData.user = user;
-    // ...
+    // 
+    makeGithubRequest(token).then(data => {
+      console.log(data);
+    });
+  
   })
   .catch(function(error) {
     console.log('Error', error)
@@ -41,7 +45,22 @@ firebase
     const credential = error.credential;
     // ...
   });
-// console.log("firebase");
-// chrome.identity.getAuthToken({ iteractive: true }, function(token) {
-//   return token;
-// });
+
+function makeGithubRequest(token) {
+  const apiEndPoint = `user/repos`
+  const baseUrl = `https://api.github.com/${apiEndPoint}?access_token=${token}`;
+  
+  return new Promise(function(resolve, reject){
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", baseUrl, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+        // JSON.parse does not evaluate the attacker's scripts.
+        var resp = JSON.parse(xhr.responseText);
+        resolve(resp);
+      }
+    }
+    xhr.send();
+  })
+}
+
