@@ -20,6 +20,7 @@ firebase
   .auth()
   .signInWithPopup(provider)
   .then(function(result) {
+    console.log('successful log in')
     // This gives you a GitHub Access Token. You can use it to access the GitHub API.
     const token = result.credential.accessToken;
     userData.userToken = token;
@@ -29,6 +30,8 @@ firebase
     // ...
   })
   .catch(function(error) {
+    console.log('Error', error)
+
     // Handle Errors here.
     const errorCode = error.code;
     const errorMessage = error.message;
