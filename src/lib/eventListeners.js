@@ -1,7 +1,19 @@
-export function initBackgroundListeners() {
+function checkLoggedIn(stateRef) {
+  console.log('succ called isLoggedIN');
+  return stateRef.loggedIn;
+}
+
+export function initBackgroundListeners(stateRef) {
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    // define a switch statement
-    // if case is
+    switch (request.messageType) {
+      case 'isLoggedIn':
+        const loggedIn = checkLoggedIn(stateRef);
+        sendResponse({ loggedIn });
+        break;
+      default:
+        console.warn('event name not recognized');
+        break;
+    }
 
     console.log('received message & sending response');
     const userData = {

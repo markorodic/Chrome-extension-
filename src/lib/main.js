@@ -9,12 +9,9 @@ import {
 import { initBackgroundListeners } from './eventListeners.js';
 import { State } from './state.js';
 
-console.log('main.js');
-
-// initialize empty state
 let state = new State();
 
-// initalize background listeners
+initBackgroundListeners(state);
 
 getStoredUserData().then(userData => {
   // TODO: save that data into userData.js
@@ -23,5 +20,3 @@ getStoredUserData().then(userData => {
   }
   console.log(state);
 });
-
-initBackgroundListeners();

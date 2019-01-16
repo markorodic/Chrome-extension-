@@ -17,6 +17,7 @@
   },
   "rules": {
     "no-console": "off",
-    "curly": "warn"
+    "curly": "warn",
+    "no-case-declarations": "off"
   }
 }
