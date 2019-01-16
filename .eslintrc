@@ -1,5 +1,5 @@
 {
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended", "prettier"],
   "globals": {
     "firebase": true,
     "chrome": true,
@@ -16,7 +16,6 @@
   },
   "rules": {
     "no-console": "off",
-    "strict": ["error", "global"],
     "curly": "warn"
   }
 }
