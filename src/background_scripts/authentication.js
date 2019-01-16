@@ -1,6 +1,6 @@
 'use strict';
 
-const userData = {
+let userData = {
   token: '',
   displayName: '',
   username: '',
@@ -11,7 +11,7 @@ function getGithubUserData() {
   return new Promise((resolve, reject) => {
     chrome.storage.sync.get(['ghToken'], function(result) {
       // eslint-disable-next-line
-      if (!!result) {
+      if (!result) {
         // Case: no gh-token found in storage, prompt firebase for auth
         promptFirebaseAuth()
           .then(userData => {
@@ -21,7 +21,9 @@ function getGithubUserData() {
             reject(err);
           });
       } else {
-        resolve(result['ghToken']);
+        userData = result.ghToken;
+
+        resolve(userData);
       }
     });
   });
