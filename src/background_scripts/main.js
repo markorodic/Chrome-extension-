@@ -1,15 +1,14 @@
-console.log('main')
-
+'use strict';
 /** Gets Github Authentication token
  *
  */
-// chrome.storage.sync.set({ key: myToken }, function() {
-//   console.log('Value is set to ' + myToken);
-// });
 
-getGithubUserData().then(_ => {
-    makeIssueRequest(userData.token)
+// eslint-disable-next-line
+getGithubUserData()
+  .then(_ => {
+    // eslint-disable-next-line
+    makeIssueRequest(userData.token);
   })
   .catch(err => {
     console.log(err);
-  }); 
+  });
