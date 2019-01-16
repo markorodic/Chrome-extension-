@@ -8,7 +8,6 @@ console.log('main')
 // });
 
 getGithubUserData().then(_ => {
-    console.log('TGHIS WONT RUN')
     makeIssueRequest(userData.token)
   })
   .catch(err => {
