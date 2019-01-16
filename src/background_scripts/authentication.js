@@ -7,12 +7,22 @@ let userData = {
   loggedIn: false,
 };
 
+function clearLocalStorage() {
+  chrome.storage.sync.set({ ghToken: null }, function() {
+    chrome.storage.sync.get(['ghToken'], function(result) {
+      console.log('YOOOOOOOO');
+      console.log(result);
+    });
+  });
+}
+
 // eslint-disable-next-line
 function getGithubUserData() {
   return new Promise((resolve, reject) => {
-    chrome.storage.sync.get(['ghToken'], function(result) {
+    chrome.storage.sync.get(['ghToken'], function({ ghToken }) {
+      // const noToken = Object.prototype.hasOwnProperty.call(result, '')
       // eslint-disable-next-line
-      if (!result) {
+      if (!ghToken) {
         // Case: no gh-token found in storage, prompt firebase for auth
         promptFirebaseAuth()
           .then(userData => {
@@ -22,7 +32,7 @@ function getGithubUserData() {
             reject(err);
           });
       } else {
-        userData = result.ghToken;
+        userData = ghToken;
 
         resolve(userData);
       }
@@ -54,7 +64,7 @@ function promptFirebaseAuth() {
     firebase.initializeApp(config);
 
     const provider = new firebase.auth.GithubAuthProvider();
-    provider.addScope('public_repo');
+    provider.addScope('public_repo').addScope('repo');
 
     firebase
       .auth()
