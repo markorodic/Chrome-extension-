@@ -2,7 +2,8 @@
   "extends": "eslint:recommended",
   "globals": {
     "firebase": true,
-    "chrome": true
+    "chrome": true,
+    "userData": true
   },
   "env": {
     "browser": true,

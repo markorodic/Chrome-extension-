@@ -1,9 +1,12 @@
 #+TITLE: TODO
   * make a mutation for adding git issue (hard coded data)
   * query for any git repository (by user):
-  * how to convert issue_template.md --> form 
+  * how to convert issue_template.md --> form
   * make a form that can dynamically create issue content that we submit as a git issue
 
+
+TITLE: Features
+* use es6 modules, namespacing??
 
 #+TITLE: Notes
   * https://flehcgcnpkikelknocmbgaicenipnfkp.chromiumapp.org/
