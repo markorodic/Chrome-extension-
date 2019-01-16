@@ -3,13 +3,28 @@
   * query for any git repository (by user):
   * how to convert issue_template.md --> form
   * make a form that can dynamically create issue content that we submit as a git issue
+  * UserData == STATE, make this our state file.
 
 
 TITLE: Features
-* use es6 modules, namespacing??
+* TODO use es6 modules, namespacing??
+* DONE get rid of that annoying error message development firebase thing
 * refactor, and remove ghToken 
 * logout button
 * change xhr --> fetch
 
 #+TITLE: Notes
   * https://flehcgcnpkikelknocmbgaicenipnfkp.chromiumapp.org/
+  * Using es6 modules in content scripts!!! https://stackoverflow.com/questions/48104433/how-to-import-es6-modules-in-content-script-for-chrome-extension/48121629#48121629
+
+#+TITLE: Wednesday Am things I did
+- made `lint` & `format` npm script
+- changed lib names to use `.library.` to make it easier to ignore in eslint
+- downloaded `eslint-config-prettier` & `eslint-plugin-prettier`:
+  --> turns off eslint formatting rules
+  ** https://github.com/prettier/eslint-config-prettier#special-rules
+- removed `use strict` & using es6 modules
+
+#+TITLE: mini-sprint
+* wrapper function in api that makes fetch request
+* function that has state & exposes mutations
