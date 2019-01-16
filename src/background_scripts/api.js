@@ -1,5 +1,6 @@
 'use strict';
 
+// eslint-disable-next-line
 function makeGithubRequest(token) {
   const baseUrl = `https://api.github.com/graphql?access_token=${token}`;
 
@@ -30,6 +31,7 @@ function makeGithubRequest(token) {
   });
 }
 
+// eslint-disable-next-line
 function makeIssueRequest(token, repo) {
   const baseUrl = `https://api.github.com/graphql?access_token=${token}`;
 

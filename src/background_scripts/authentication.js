@@ -6,6 +6,7 @@ const userData = {
   username: '',
 };
 
+// eslint-disable-next-line
 function getGithubUserData() {
   return new Promise((resolve, reject) => {
     chrome.storage.sync.get(['ghToken'], function(result) {
