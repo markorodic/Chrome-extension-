@@ -1,5 +1,4 @@
 function checkLoggedIn(stateRef) {
-  console.log('succ called isLoggedIN');
   return stateRef.loggedIn;
 }
 
@@ -9,6 +8,9 @@ export function initBackgroundListeners(stateRef) {
       case 'isLoggedIn':
         const loggedIn = checkLoggedIn(stateRef);
         sendResponse({ loggedIn });
+        break;
+      case 'authenticateUser':
+        console.log('authUser');
         break;
       default:
         console.warn('event name not recognized');
