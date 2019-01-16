@@ -36,10 +36,25 @@ function authenticateUser() {
   });
 }
 
-function registerPopupListeners() {
-  const loginButtonElement = document.getElementById('login-btn');
+registerDocumentEventListeners();
 
-  loginButtonElement.addEventListener(authenticateUser);
+function registerDocumentEventListeners() {
+  if (
+    document.attachEvent
+      ? document.readyState === 'complete'
+      : document.readyState !== 'loading'
+  ) {
+    console.log('dom was loaded');
+    registerPopupListeners();
+  } else {
+    console.log('inside else');
+    document.addEventListener('DOMContentLoaded', registerPopupListeners);
+  }
 }
 
-registerPopupListeners();
+function registerPopupListeners() {
+  const loginButtonElement = document.getElementById('login-btn');
+  const test = document.querySelector('#login-btn');
+  console.log(loginButtonElement, test);
+  loginButtonElement.addEventListener(authenticateUser);
+}
