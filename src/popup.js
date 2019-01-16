@@ -1,3 +1,7 @@
-chrome.runtime.sendMessage({ message: 'am I logged in?' }, response => {
-  console.log(response);
+chrome.runtime.sendMessage({ messageType: 'isAuthenticated' }, response => {
+  if (response.loggedIn) {
+    console.log(`Logged in, hello: ${response.username}`);
+  } else {
+    console.log('please sign in');
+  }
 });

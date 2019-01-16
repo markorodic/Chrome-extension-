@@ -4,35 +4,13 @@ let userData = {
   username: '',
   loggedIn: false,
 };
-
-export function clearLocalStorage() {
-  chrome.storage.sync.set({ ghToken: null }, function() {
-    chrome.storage.sync.get(['ghToken'], function(result) {
-      console.log(result);
-    });
-  });
-}
-
-export function getGithubUserData() {
-  return new Promise((resolve, reject) => {
-    chrome.storage.sync.get(['ghToken'], function({ ghToken }) {
-      if (!ghToken) {
-        // Case: no gh-token found in storage, prompt firebase for auth
-        promptFirebaseAuth()
-          .then(userData => {
-            resolve(userData);
-          })
-          .catch(err => {
-            reject(err);
-          });
-      } else {
-        userData = ghToken;
-
-        resolve(userData);
-      }
-    });
-  });
-}
+// promptFirebaseAuth()
+// .then(userData => {
+//   resolve(userData);
+// })
+// .catch(err => {
+//   reject(err);
+// });
 
 /**
  *  prompts Firebase Authentication to get Github authentication credentials
