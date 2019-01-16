@@ -56,5 +56,5 @@ function registerPopupListeners() {
   const loginButtonElement = document.getElementById('login-btn');
   const test = document.querySelector('#login-btn');
   console.log(loginButtonElement, test);
-  loginButtonElement.addEventListener(authenticateUser);
+  loginButtonElement.addEventListener('click', authenticateUser);
 }

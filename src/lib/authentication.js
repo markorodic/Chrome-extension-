@@ -1,24 +1,10 @@
-let userData = {
-  token: '',
-  displayName: '',
-  username: '',
-  loggedIn: false,
-};
-// promptFirebaseAuth()
-// .then(userData => {
-//   resolve(userData);
-// })
-// .catch(err => {
-//   reject(err);
-// });
-
 /**
  *  prompts Firebase Authentication to get Github authentication credentials
  *  also saves the github token in chrome.storage
  *  @returns {Promise}
  */
 
-function promptFirebaseAuth() {
+export function promptFirebaseAuth() {
   return new Promise((resolve, reject) => {
     // console.log('invoking authentication with Firebase!!');
     /**
@@ -33,7 +19,11 @@ function promptFirebaseAuth() {
       storageBucket: 'github-issue-extension.appspot.com',
       messagingSenderId: '765664737086',
     };
-    firebase.initializeApp(config);
+
+    // TODO: should only get initialized once!!!
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+    }
 
     const provider = new firebase.auth.GithubAuthProvider();
     provider.addScope('public_repo').addScope('repo');
@@ -46,17 +36,17 @@ function promptFirebaseAuth() {
         // TODO: other things on result that are interesting:
         // expirationTime
         // refreshToken
+        const userData = {};
         userData.token = result.credential.accessToken;
         userData.displayName = result.user.displayName;
         userData.username = result.additionalUserInfo.username;
         userData.loggedIn = true;
 
-        // console.log(result);
-        // console.log('-------------------')
-
-        chrome.storage.sync.set({ ghToken: userData }, function() {
-          resolve(userData);
-        });
+        resolve(userData);
+        // TODO: remove couple where saving inside
+        // chrome.storage.sync.set({ ghToken: userData }, function() {
+        //   resolve(userData);
+        // });
       })
       .catch(function(error) {
         console.error('FAILED LOGIN WITH GITHUB');

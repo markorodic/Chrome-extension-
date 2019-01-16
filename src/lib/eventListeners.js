@@ -1,3 +1,5 @@
+import { promptFirebaseAuth } from './authentication.js';
+
 function checkLoggedIn(stateRef) {
   return stateRef.loggedIn;
 }
@@ -11,22 +13,20 @@ export function initBackgroundListeners(stateRef) {
         break;
       case 'authenticateUser':
         console.log('authUser');
+
+        promptFirebaseAuth()
+          .then(userData => {
+            // store in chrome
+            sendResponse(userData);
+          })
+          .catch(err => {
+            sendResponse(err);
+          });
+
         break;
       default:
         console.warn('event name not recognized');
         break;
-    }
-
-    console.log('received message & sending response');
-    const userData = {
-      loggedIn: true,
-      username: 'Marko',
-    };
-
-    if (userData.loggedIn) {
-      sendResponse(userData);
-    } else {
-      sendResponse({ loggedIn: false });
     }
   });
 }
