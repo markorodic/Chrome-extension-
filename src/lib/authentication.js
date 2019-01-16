@@ -1,5 +1,3 @@
-'use strict';
-
 let userData = {
   token: '',
   displayName: '',
@@ -7,21 +5,17 @@ let userData = {
   loggedIn: false,
 };
 
-function clearLocalStorage() {
+export function clearLocalStorage() {
   chrome.storage.sync.set({ ghToken: null }, function() {
     chrome.storage.sync.get(['ghToken'], function(result) {
-      console.log('YOOOOOOOO');
       console.log(result);
     });
   });
 }
 
-// eslint-disable-next-line
-function getGithubUserData() {
+export function getGithubUserData() {
   return new Promise((resolve, reject) => {
     chrome.storage.sync.get(['ghToken'], function({ ghToken }) {
-      // const noToken = Object.prototype.hasOwnProperty.call(result, '')
-      // eslint-disable-next-line
       if (!ghToken) {
         // Case: no gh-token found in storage, prompt firebase for auth
         promptFirebaseAuth()

@@ -1,29 +1,76 @@
-'use strict';
+const baseUrl = `https://api.github.com/graphql?access_token=`;
 
-function makeIssueFetch(token) {
-  const baseUrl = `https://api.github.com/graphql?access_token=${token}`;
-  var mutation = `mutation {
-    createIssue(input: {
-      assigneeIds: "MDQ6VXNlcjczNjQ4MDA=",
-      labelIds: "MDU6TGFiZWwzMTgxMjg3NzA=",
-      projectIds: "MDc6UHJvamVjdDIwNzU3MDc=",
-      repositoryId: "MDEwOlJlcG9zaXRvcnk1MDYwNDk5Nw==",
-      title: "Paul is a graphql herooooooooooooooooooooo!"
-    }) {
-      clientMutationId
-    }
-  }`;
+// creates an Issue in thechutrain/js-playground repo
+// source: https://github.com/thechutrain/js-playground/issues
+export const exQuery1 = `mutation {
+  createIssue(input: {
+    assigneeIds: "MDQ6VXNlcjczNjQ4MDA=",
+    labelIds: "MDU6TGFiZWwzMTgxMjg3NzA=",
+    projectIds: "MDc6UHJvamVjdDIwNzU3MDc=",
+    repositoryId: "MDEwOlJlcG9zaXRvcnk1MDYwNDk5Nw==",
+    title: "Marko is too kind"
+  }) {
+    clientMutationId
+  }
+}`;
 
-  return fetch(baseUrl, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/vnd.github.starfire-preview+json',
-    },
+export const exQuery2 = `{
+  viewer {
+    name
+     repositories(last: 4) {
+       nodes {
+         name
+       }
+     }
+   }
+}`;
+
+export function makeQuery(token, mutation, opts = {}) {
+  const ghUrl = `${baseUrl}${token}`;
+  const fetchOptions = {
+    method: opts.method ? opts.method : 'POST',
     body: JSON.stringify({ query: mutation }),
-  }).then(response => {
+  };
+
+  /** Note: some github graphql queries require additional header param
+   *  since they are still in development
+   *  source: https://developer.github.com/v4/previews/#issues-preview
+   */
+  if (opts.preview) {
+    fetchOptions.headers = {
+      Accept: 'application/vnd.github.starfire-preview+json',
+    };
+  }
+
+  return fetch(ghUrl, fetchOptions).then(response => {
     return response.json();
   });
 }
+
+// function makeIssueFetch(token) {
+//   const baseUrl = `https://api.github.com/graphql?access_token=${token}`;
+//   var mutation = `mutation {
+//     createIssue(input: {
+//       assigneeIds: "MDQ6VXNlcjczNjQ4MDA=",
+//       labelIds: "MDU6TGFiZWwzMTgxMjg3NzA=",
+//       projectIds: "MDc6UHJvamVjdDIwNzU3MDc=",
+//       repositoryId: "MDEwOlJlcG9zaXRvcnk1MDYwNDk5Nw==",
+//       title: "Paul is a graphql herooooooooooooooooooooo!"
+//     }) {
+//       clientMutationId
+//     }
+//   }`;
+
+//   return fetch(baseUrl, {
+//     method: 'POST',
+//     headers: {
+//       Accept: 'application/vnd.github.starfire-preview+json',
+//     },
+//     body: JSON.stringify({ query: mutation }),
+//   }).then(response => {
+//     return response.json();
+//   });
+// }
 
 function queryFetch(token) {
   const baseUrl = `https://api.github.com/graphql?access_token=${token}`;

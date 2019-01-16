@@ -43914,9 +43914,9 @@
       };
       t.INTERNAL.registerService(Kv, Qv, e, void 0, !0);
     })(Gn),
-    console.warn(
-      "\nIt looks like you're using the development build of the Firebase JS SDK.\nWhen deploying Firebase apps to production, it is advisable to only import\nthe individual SDK components you intend to use.\n\nFor the CDN builds, these are available in the following manner\n(replace <PACKAGE> with the name of a component - i.e. auth, database, etc):\n\nhttps://www.gstatic.com/firebasejs/5.0.0/firebase-<PACKAGE>.js\n"
-    ),
+    // console.warn(
+    //   "\nIt looks like you're using the development build of the Firebase JS SDK.\nWhen deploying Firebase apps to production, it is advisable to only import\nthe individual SDK components you intend to use.\n\nFor the CDN builds, these are available in the following manner\n(replace <PACKAGE> with the name of a component - i.e. auth, database, etc):\n\nhttps://www.gstatic.com/firebasejs/5.0.0/firebase-<PACKAGE>.js\n"
+    // ),
     Gn
   );
 });

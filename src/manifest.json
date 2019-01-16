@@ -11,7 +11,7 @@
     ]
   },
   "background": {
-    "scripts": ["background_scripts/firebaseLibrary-5.7.2.js", "background_scripts/authentication.js", "background_scripts/api.js", "background_scripts/main.js"],
+    "page": "background.html",
     "persistent": false
   },
   "manifest_version": 2,
