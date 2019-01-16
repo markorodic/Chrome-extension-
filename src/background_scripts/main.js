@@ -5,11 +5,21 @@
 
 // eslint-disable-next-line
 getGithubUserData()
-  .then(_ => {
+  .then(userData => {
     console.log(userData.token);
     // eslint-disable-next-line
-    makeIssueRequest(userData.token);
+    // makeIssueRequest(userData.token);
     // makeGithubRequest(userData.token);
+
+    // USING FETCH:
+    makeIssueFetch(userData.token).then(data => {
+      console.log(data);
+    });
+
+    // FETCH WORKS:
+    // queryFetch(userData.token).then(data => {
+    //   console.log(data);
+    // });
   })
   .catch(err => {
     console.log(err);
@@ -22,3 +32,5 @@ getGithubUserData()
 //     sendResponse({ loggedIn: false });
 //   }
 // });
+
+// clearLocalStorage();
