@@ -4,6 +4,7 @@ let userData = {
   token: '',
   displayName: '',
   username: '',
+  loggedIn: false,
 };
 
 // eslint-disable-next-line
@@ -53,6 +54,7 @@ function promptFirebaseAuth() {
     firebase.initializeApp(config);
 
     const provider = new firebase.auth.GithubAuthProvider();
+    provider.addScope('public_repo');
 
     firebase
       .auth()
@@ -65,6 +67,7 @@ function promptFirebaseAuth() {
         userData.token = result.credential.accessToken;
         userData.displayName = result.user.displayName;
         userData.username = result.additionalUserInfo.username;
+        userData.loggedIn = true;
 
         // console.log(result);
         // console.log('-------------------')

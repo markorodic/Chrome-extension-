@@ -35,33 +35,34 @@ function makeGithubRequest(token) {
 function makeIssueRequest(token, repo) {
   const baseUrl = `https://api.github.com/graphql?access_token=${token}`;
 
-  // let mutation = {
-  //   mutation: `{
-  //     Mutation.createIssue(input: {
-  //       assigneeIds: "MDQ6VXNlcjczNjQ4MDA=",
-  //       labelIds: "MDU6TGFiZWwzMTgxMjg3NzA=",
-  //       projectIds: "MDc6UHJvamVjdDIwNzU3MDc=",
-  //       repositoryId: "MDEwOlJlcG9zaXRvcnk1MDYwNDk5Nw==",
-  //       title: "YOOO graphQL is boss"
-  //     }) {
-  //       clientMutationId,
-  //       issue
-  //      }
-  //   }`
-  // }
-
   let mutation = {
     mutation: `{
-        addReaction(input:{subjectId:"MDU6SXNzdWUyMzEzOTE1NTE=",content:HOORAY}) {
-          reaction {
-            content
-          }
-          subject {
-            id
-          }
+      createIssue(input: {
+        assigneeIds: "MDQ6VXNlcjczNjQ4MDA=",
+        labelIds: "MDU6TGFiZWwzMTgxMjg3NzA=",
+        projectIds: "MDc6UHJvamVjdDIwNzU3MDc=",
+        repositoryId: "MDEwOlJlcG9zaXRvcnk1MDYwNDk5Nw==",
+        title: "YOOO graphQL is boss"
+      }) {
+        issue {
+          id
         }
-      }`,
+       }
+    }`,
   };
+
+  // let mutation = {
+  //   mutation: `{
+  //       addReaction(input:{subjectId:"MDU6SXNzdWUyMzEzOTE1NTE=",content:HOORAY}) {
+  //         reaction {
+  //           content
+  //         }
+  //         subject {
+  //           id
+  //         }
+  //       }
+  //     }`,
+  // };
 
   return new Promise(function(resolve, reject) {
     var xhr = new XMLHttpRequest();
@@ -74,6 +75,7 @@ function makeIssueRequest(token, repo) {
       if (xhr.readyState == 4) {
         // JSON.parse does not evaluate the attacker's scripts.
         var resp = JSON.parse(xhr.responseText);
+        console.log(resp.error);
         resolve(resp);
       }
     };
