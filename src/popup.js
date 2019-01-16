@@ -31,5 +31,15 @@ function renderIssueScreen() {
 }
 
 function authenticateUser() {
-  chrome.runtime.sendMessage({ messageType: 'authenticateUser' });
+  chrome.runtime.sendMessage({ messageType: 'authenticateUser' }, response => {
+    console.log(response);
+  });
 }
+
+function registerPopupListeners() {
+  const loginButtonElement = document.getElementById('login-btn');
+
+  loginButtonElement.addEventListener(authenticateUser);
+}
+
+registerPopupListeners();
