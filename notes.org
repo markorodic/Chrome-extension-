@@ -8,6 +8,8 @@
 TITLE: Features
 * use es6 modules, namespacing??
 * refactor, and remove ghToken 
+* logout button
+* change xhr --> fetch
 
 #+TITLE: Notes
   * https://flehcgcnpkikelknocmbgaicenipnfkp.chromiumapp.org/
