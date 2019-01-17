@@ -1,12 +1,9 @@
 /**
  *  prompts Firebase Authentication to get Github authentication credentials
- *  also saves the github token in chrome.storage
  *  @returns {Promise}
  */
-
 export function promptFirebaseAuth() {
   return new Promise((resolve, reject) => {
-    // console.log('invoking authentication with Firebase!!');
     /**
      * Initializes our firebase app
      * NOTE: perhaps we should only do this if we need to authenticate? maybe not
@@ -20,7 +17,7 @@ export function promptFirebaseAuth() {
       messagingSenderId: '765664737086',
     };
 
-    // TODO: should only get initialized once!!!
+    // Notes: ensures that firebase only gets initialized once
     if (!firebase.apps.length) {
       firebase.initializeApp(config);
     }
@@ -32,10 +29,6 @@ export function promptFirebaseAuth() {
       .auth()
       .signInWithPopup(provider)
       .then(function(result) {
-        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-        // TODO: other things on result that are interesting:
-        // expirationTime
-        // refreshToken
         const userData = {};
         userData.token = result.credential.accessToken;
         userData.displayName = result.user.displayName;
@@ -43,10 +36,6 @@ export function promptFirebaseAuth() {
         userData.loggedIn = true;
 
         resolve(userData);
-        // TODO: remove couple where saving inside
-        // chrome.storage.sync.set({ ghToken: userData }, function() {
-        //   resolve(userData);
-        // });
       })
       .catch(function(error) {
         console.error('FAILED LOGIN WITH GITHUB');
