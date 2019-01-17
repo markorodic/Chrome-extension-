@@ -17,6 +17,7 @@ TITLE: Features
 #+TITLE: Notes
   * https://flehcgcnpkikelknocmbgaicenipnfkp.chromiumapp.org/
   * Using es6 modules in content scripts!!! https://stackoverflow.com/questions/48104433/how-to-import-es6-modules-in-content-script-for-chrome-extension/48121629#48121629
+  * use babel to do es6 imports
 
 #+TITLE: Wednesday Am things I did
 - made `lint` & `format` npm script
