@@ -30,6 +30,9 @@ export function initState() {
     }
     state = Object.freeze(newState);
 
+    const strState = JSON.stringify(state);
+    console.log(`STATE CHANGE: ${strState}`);
+
     return state;
   }
 

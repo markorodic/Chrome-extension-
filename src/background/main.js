@@ -1,10 +1,7 @@
 /** Gets Github Authentication token
  *
  */
-import {
-  getStoredUserData,
-  // clearLocalStorage,
-} from './storage.js';
+import { getStoredUserData, clearLocalStorage } from './storage.js';
 import { initBackgroundListeners } from './bgEventListeners.js';
 import { initState } from './state.js';
 
@@ -16,10 +13,9 @@ initBackgroundListeners(State);
 // clearLocalStorage();
 
 getStoredUserData().then(userData => {
-  console.log(userData);
-  console.log(State.getState());
   if (userData && userData.token) {
     State.setState(userData);
-    console.log(State.getState());
   }
+  const strState = JSON.stringify(State.getState());
+  console.log(`State: ${strState}`);
 });

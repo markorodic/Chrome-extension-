@@ -22,8 +22,9 @@ function registerViewEventListeners() {
   const loginButtonElement = document.getElementById('login-github-btn');
   loginButtonElement.addEventListener('click', authenticateUser);
 
-  const addIssueBtn = document.getElementById('add-issue');
-  addIssueBtn.addEventListener('submit', submitIssue);
+  // FIX
+  // const addIssueBtn = document.getElementById('add-issue');
+  // addIssueBtn.addEventListener('submit', submitIssue);
 }
 
 function registerChromeMessageListeners() {
