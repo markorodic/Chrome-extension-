@@ -31,8 +31,12 @@ function renderIssueScreen() {
 }
 
 function authenticateUser() {
+  console.log('button pressed login');
   chrome.runtime.sendMessage({ messageType: 'authenticateUser' }, response => {
     console.log(response);
+  });
+  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    console.log(request);
   });
 }
 
@@ -47,7 +51,6 @@ function registerDocumentEventListeners() {
     console.log('dom was loaded');
     registerPopupListeners();
   } else {
-    console.log('inside else');
     document.addEventListener('DOMContentLoaded', registerPopupListeners);
   }
 }

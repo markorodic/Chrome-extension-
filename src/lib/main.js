@@ -18,5 +18,4 @@ getStoredUserData().then(userData => {
   if (userData && userData.token) {
     state = state.setUserData(userData);
   }
-  console.log(state);
 });

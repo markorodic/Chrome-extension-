@@ -14,14 +14,17 @@ export function initBackgroundListeners(stateRef) {
       case 'authenticateUser':
         console.log('authUser');
 
-        promptFirebaseAuth()
-          .then(userData => {
-            // store in chrome
-            sendResponse(userData);
-          })
-          .catch(err => {
-            sendResponse(err);
-          });
+        sendResponse('getting authenticated user');
+
+        chrome.runtime.sendMessage('userdata');
+        // promptFirebaseAuth()
+        //   .then(userData => {
+        //     // store in chrome
+
+        //   })
+        //   .catch(err => {
+        //     sendResponse(err);
+        //   });
 
         break;
       default:
