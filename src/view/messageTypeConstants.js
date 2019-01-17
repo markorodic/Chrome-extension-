@@ -5,6 +5,7 @@
 // Question: can I get rid of view prefix, if all can just be prefixed with IS_?
 const VIEW_IS_LOGGED_IN = 'view/is_logged_in';
 const VIEW_PROMPT_AUTH = 'view/prompt_authentication_of_user';
+const FORM_SUBMISSION = 'view/issue_form_submission';
 
 // BACKGROUND origin
 const BG_LOGIN_PENDING = 'background/login_pending';

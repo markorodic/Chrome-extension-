@@ -1,8 +1,10 @@
+/* global FORM_SUBMISSION */
+
 function addIssue(event) {
   event.preventDefault();
   console.log(document);
 
-  response = {};
+  const formData = {};
 
   const repository = document.getElementById('repository-selection');
   const repositoryValue = repository.options[repository.selectedIndex].value;
@@ -12,22 +14,27 @@ function addIssue(event) {
   var titleTextValue = document.getElementById('issue-form-title').value;
   var bodyTextValue = document.getElementById('issue-form-body').value;
 
-  response.repository = repositoryValue;
-  response.error = errorCheckboxValue ? consoleError : '';
-  response.title = titleTextValue;
-  response.issue = bodyTextValue;
+  formData.repository = repositoryValue;
+  formData.error = errorCheckboxValue ? consoleError : '';
+  formData.title = titleTextValue;
+  formData.issue = bodyTextValue;
+
+  sendFormData(formData);
 
   return false;
 }
 
-function authenticate() {
-  console.log('logged in');
+function sendFormData(formData) {
+  console.log('form data sending');
+  chrome.runtime.sendMessage(
+    { messageType: FORM_SUBMISSION, formData },
+    response => {
+      console.log(response);
+    }
+  );
 }
 
 window.addEventListener('load', function(evt) {
   console.log(document.getElementById('login-github-btn'));
   document.getElementById('add-issue').addEventListener('submit', addIssue);
-  document
-    .getElementById('login-github-btn')
-    .addEventListener('click', authenticate);
 });

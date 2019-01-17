@@ -17,11 +17,20 @@ export function initBackgroundListeners(State) {
         authenticateUser();
         break;
 
+      case messageType.FORM_SUBMISSION:
+        sendResponse('form submission message receieved');
+        submitIssue(request.formData);
+        break;
+
       default:
         console.warn('event name not recognized');
         break;
     }
   });
+}
+
+function submitIssue(formData) {
+  console.log(formData);
 }
 
 function authenticateUser() {
