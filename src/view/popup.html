@@ -6,18 +6,123 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <script src="popup.js"></script>
-    <style>
-      .hidden {
-        display: none;
-      }
-    </style>
+    <script src="popup.clientSideScript.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css" />
   </head>
   <body>
-    <h1>is loading</h1>
     <div id="login-screen">
-      <h1>login screen</h1>
-      <button id="login-btn">login</button>
+      <div class="login-title-header">
+        <img src="favicon.svg" />
+        <h1><b>Issue Poster</b> for GitHub</h1>
+      </div>
+      <div class="login-body">
+        <button id="login-github-btn">
+          <img src="github.svg" />Login with GitHub
+        </button>
+        <div class="login-footer-text">
+          <h2 class="login-footer-text-title">
+            Need to create a GitHub issue?
+          </h2>
+          <p class="login-footer-text-paragraph">
+            Submit a GithHub issue directly from your chrome broswer and add
+            your console errors.
+          </p>
+        </div>
+      </div>
     </div>
-    <div id="issue-screen"><h1>issue screen</h1></div>
+    <div id="issue-screen" class="hidden">
+      <div class="login-title-header">
+        <img src="favicon.svg" />
+        <h1><b>Issue Poster</b> for GitHub</h1>
+      </div>
+      <div class="issue-body">
+        <form id="add-issue">
+          <div class="issue-step-one">
+            <h2 class="issue-step-one-title">Choose a repository</h2>
+            <div class="select-container">
+              <select id="repository-selection">
+                <option
+                  >Selection a repository
+                  <svg
+                    style="transform: rotate(0deg);"
+                    fill="#000000"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"
+                    ></path>
+                    <path d="M0-.75h24v24H0z" fill="none"></path>
+                  </svg>
+                </option>
+                <option value="first-repository">JS-Playground</option>
+                <option value="second-repository">Something Else</option>
+                <option value="third-repository">Last One</option>
+              </select>
+            </div>
+            <!-- <nav role="navigation">
+            <ul>
+              <li class="navigation-list-item">
+                <div class="issue-navigation-selected-item">
+                  Find your repository
+                </div>
+                <ul class="dropdown">
+                  <li>JS- Playground</li>
+                  <li>Elm-Breakout</li>
+                  <li>Vanilla-Javascript-Game</li>
+                </ul>
+              </li>
+            </ul>
+          </nav> -->
+          </div>
+          <div class="issue-step-two">
+            <h2 class="issue-step-two-title">Select any console errors</h2>
+            <div class="issue-step-two-toggle-section">
+              <div class="issue-step-two-toggle">
+                <input class="hide" id="toggle" type="checkbox" />
+                <label for="toggle"
+                  ><span class="hide">Label Title</span></label
+                >
+                <p class="console-error">Function is not defined...</p>
+              </div>
+            </div>
+          </div>
+          <div class="issue-step-three">
+            <h2 class="issue-step-three-title">Add your issue</h2>
+            <div class="issue-three-form-fields">
+              <input
+                id="issue-form-title"
+                placeholder="Write your issue title"
+              />
+              <!-- prettier-ignore -->
+              <textarea type="text" id="issue-form-body" placeholder="Write your issue body" ></textarea>
+            </div>
+          </div>
+          <div class="issue-three-form-button">
+            <button type="submit" value="submit" class="issue-form-button">
+              Post Issue
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="post-success-screen" class="hidden">
+      <div class="login-title-header">
+        <img src="favicon.svg" />
+        <h1><b>Issue Poster</b> for GitHub</h1>
+      </div>
+      <div class="post-success-body">
+        <h2 class="post-success-title">You've submitted your issue! 👍</h2>
+      </div>
+      <script>
+        function mySubmitFunction(e) {
+          e.preventDefault();
+          console.log(e);
+          return false;
+        }
+      </script>
+    </div>
   </body>
 </html>
