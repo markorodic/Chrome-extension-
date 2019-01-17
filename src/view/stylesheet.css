@@ -248,7 +248,7 @@ option {
 }
 
 .issue-form-button {
-  width: 100%;
+  width: 15.7rem;
   height: 2.5rem;
   border: none;
   padding: 0;
@@ -269,11 +269,10 @@ option {
 }
 
 .issue-three-form-button {
-  height: 2rem;
   justify-content: center;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  height: 6rem;
 }
 
 /* post-success-screen */

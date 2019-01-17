@@ -21,17 +21,31 @@ isUserLoggedIn().then(loggedIn => {
 function renderLoginScreen() {
   const loginScreenElement = document.getElementById('login-screen');
   const issueScreenElement = document.getElementById('issue-screen');
+  const postSuccessScreen = document.getElementById('post-success-screen');
 
-  loginScreenElement.classList.add('hidden');
-  issueScreenElement.classList.remove('hidden');
+  loginScreenElement.classList.remove('hidden');
+  issueScreenElement.classList.add('hidden');
+  issueScreenElement.classList.add('hidden');
 }
 
 function renderIssueScreen() {
   const loginScreenElement = document.getElementById('login-screen');
   const issueScreenElement = document.getElementById('issue-screen');
+  const issueScreenElement = document.getElementById('post-success-screen');
 
-  loginScreenElement.classList.remove('hidden');
+  loginScreenElement.classList.add('hidden');
+  issueScreenElement.classList.remove('hidden');
   issueScreenElement.classList.add('hidden');
+}
+
+function renderSuccessScreen() {
+  const loginScreenElement = document.getElementById('login-screen');
+  const issueScreenElement = document.getElementById('issue-screen');
+  const issueScreenElement = document.getElementById('post-success-screen');
+
+  loginScreenElement.classList.add('hidden');
+  issueScreenElement.classList.add('hidden');
+  issueScreenElement.classList.remove('hidden');
 }
 
 function authenticateUser() {
