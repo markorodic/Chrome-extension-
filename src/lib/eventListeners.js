@@ -1,4 +1,5 @@
 import { promptFirebaseAuth } from './authentication.js';
+import { setStoredUserData } from './storage.js';
 
 function checkLoggedIn(stateRef) {
   return stateRef.loggedIn;
@@ -14,17 +15,20 @@ export function initBackgroundListeners(stateRef) {
       case 'authenticateUser':
         console.log('authUser');
 
-        sendResponse('getting authenticated user');
+        sendResponse({ messageType: 'pendingLogin' });
 
-        chrome.runtime.sendMessage('userdata');
-        // promptFirebaseAuth()
-        //   .then(userData => {
-        //     // store in chrome
+        promptFirebaseAuth()
+          .then(userData => {
+            chrome.runtime.sendMessage({
+              messageType: 'successfulLogin',
+              userData,
+            });
 
-        //   })
-        //   .catch(err => {
-        //     sendResponse(err);
-        //   });
+            setStoredUserData(userData);
+          })
+          .catch(err => {
+            chrome.runtime.sendMessage({ messageType: 'failedLogin' });
+          });
 
         break;
       default:

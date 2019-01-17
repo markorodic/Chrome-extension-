@@ -35,10 +35,11 @@ function authenticateUser() {
   chrome.runtime.sendMessage({ messageType: 'authenticateUser' }, response => {
     console.log(response);
   });
-  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    console.log(request);
-  });
 }
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  console.log(request);
+});
 
 registerDocumentEventListeners();
 

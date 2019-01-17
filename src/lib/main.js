@@ -15,6 +15,7 @@ initBackgroundListeners(state);
 
 getStoredUserData().then(userData => {
   // TODO: save that data into userData.js
+  console.log(userData);
   if (userData && userData.token) {
     state = state.setUserData(userData);
   }
