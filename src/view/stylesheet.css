@@ -220,6 +220,7 @@ option {
 .issue-step-three {
   height: 11rem;
   margin: 1.5rem 2rem;
+  margin-bottom: 0;
 }
 
 #issue-form-title {
@@ -227,6 +228,7 @@ option {
   height: 1.5rem;
   margin-bottom: 0.5rem;
   outline: none;
+  padding-left: 0.5rem;
 }
 
 #issue-form-body {
@@ -235,16 +237,29 @@ option {
   margin-bottom: 0.5rem;
   border: 1px solid lightgrey;
   outline: none;
+  padding-left: 0.5rem;
 }
 
 #issue-form-title::placeholder {
   color: lightgrey;
-  padding-left: 0.5rem;
+  padding-left: 0.2rem;
 }
 
 #issue-form-body::placeholder {
   color: lightgrey;
-  padding: 0.5rem 0 0 0.5rem;
+  padding: 0.5rem 0 0 0.2rem;
+}
+
+#logo {
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  background: none;
+  color: white;
+  display: flex;
 }
 
 .issue-form-button {
@@ -261,6 +276,7 @@ option {
   justify-content: center;
   align-items: center;
   position: relative;
+  cursor: pointer;
 }
 
 .issue-three-form-fields {
@@ -273,6 +289,7 @@ option {
   align-items: center;
   display: flex;
   flex-direction: column;
+  margin: 1rem 0;
 }
 
 /* post-success-screen */

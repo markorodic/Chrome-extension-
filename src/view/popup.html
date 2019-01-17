@@ -13,9 +13,9 @@
     <link rel="stylesheet" type="text/css" href="stylesheet.css" />
   </head>
   <body>
-    <div id="login-screen">
+    <div id="login-screen" class="hidden">
       <div class="login-title-header">
-        <img src="favicon.svg" />
+        <button id="logo"><img src="favicon.svg" /></button>
         <h1><b>Issue Poster</b> for GitHub</h1>
       </div>
       <div class="login-body">
@@ -35,11 +35,11 @@
     </div>
     <div id="issue-screen">
       <div class="login-title-header">
-        <img src="favicon.svg" />
+        <button id="logo"><img src="favicon.svg" /></button>
         <h1><b>Issue Poster</b> for GitHub</h1>
       </div>
       <div class="issue-body">
-        <div id="add-issue">
+        <div>
           <div class="issue-step-one">
             <h2 class="issue-step-one-title">Choose a repository</h2>
             <div class="select-container">
@@ -111,9 +111,9 @@
         </div>
       </div>
     </div>
-    <div id="post-success-screen">
+    <div id="post-success-screen" class="hidden">
       <div class="login-title-header">
-        <img src="favicon.svg" />
+        <button id="logo"><img src="favicon.svg" /></button>
         <h1><b>Issue Poster</b> for GitHub</h1>
       </div>
       <div class="post-success-body">
