@@ -3,20 +3,22 @@
  */
 import {
   getStoredUserData,
-  setStoredUserData,
-  clearLocalStorage,
+  // clearLocalStorage,
 } from './storage.js';
 import { initBackgroundListeners } from './bgEventListeners.js';
-import { State } from './state.js';
+import { initState } from './state.js';
 
-let state = new State();
+const State = initState();
+console.log(State.getState());
 
-initBackgroundListeners(state);
+initBackgroundListeners(State);
+
+// clearLocalStorage();
 
 getStoredUserData().then(userData => {
-  // TODO: save that data into userData.js
-  // console.log(userData);
+  console.log(State.getState());
   if (userData && userData.token) {
-    state = state.setUserData(userData);
+    State.setState(userData);
+    console.log(State.getState());
   }
 });

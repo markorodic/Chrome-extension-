@@ -1,15 +1,14 @@
 import { promptFirebaseAuth } from './authentication.js';
 import { setStoredUserData } from './storage.js';
-import { State } from './state.js';
 import * as messageType from '../messageTypeConstants.js';
 
-export function initBackgroundListeners(stateRef) {
+export function initBackgroundListeners(State) {
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     switch (request.messageType) {
       case messageType.VIEW_IS_LOGGED_IN:
         sendResponse({
           messageType: messageType.BG_LOGIN_CHECK,
-          loginState: State.getLoginState(stateRef),
+          loginState: State.isLoggedIn(),
         });
         break;
 
