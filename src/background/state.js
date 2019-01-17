@@ -1,26 +1,41 @@
 const defaultState = {
   token: '',
-  tokenExpiration: '',
   displayName: '',
   username: '',
-  loggedIn: false,
+  // loggedIn: false,
 };
 
-export function State(prevState = defaultState) {
-  this.token = prevState.token;
-  this.tokenExpiration = prevState.tokenExpiration;
-  this.displayName = prevState.displayName;
-  this.username = prevState.username;
-  this.loggedIn = prevState.loggedIn;
+// TODO: remove singleton name
+export function initState() {
+  let state = Object.freeze(defaultState);
+
+  function getState() {
+    return state;
+  }
+
+  function isLoggedIn() {
+    // Note: can just determine logged in status based on whether there is a
+    // token or not for now.
+    return state.token !== '';
+  }
+
+  function setState(userData = {}) {
+    const newState = {};
+    for (let key in state) {
+      if (userData.key) {
+        newState[key] = userData[key];
+      } else {
+        newState[key] = state[key];
+      }
+    }
+    state = Object.freeze(newState);
+
+    return state;
+  }
+
+  return {
+    getState,
+    isLoggedIn,
+    setState,
+  };
 }
-
-State.prototype.setUserData = function(userData) {
-  const newState = new State();
-  newState.token = userData.token;
-  newState.tokenExpiration = userData.tokenExpiration;
-  newState.displayName = userData.displayName;
-  newState.username = userData.username;
-  newState.loggedIn = userData.loggedIn;
-
-  return newState;
-};
