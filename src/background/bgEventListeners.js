@@ -19,8 +19,11 @@ export function initBackgroundListeners(State) {
         break;
 
       case messageType.FORM_SUBMISSION:
-        sendResponse('form submission message receieved');
-        submitIssue(State, request.formData);
+        // submitIssue(State, request.formData);
+        createJsPlaygroundIssue(
+          '1b3bd572380a613bfa74735e8f2af861b1259245',
+          'IM A NEW ISSSSSUUEEE!!!'
+        );
         break;
 
       default:
