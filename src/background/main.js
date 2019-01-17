@@ -10,12 +10,12 @@ console.log(State.getState());
 
 initBackgroundListeners(State);
 
-// clearLocalStorage();
+clearLocalStorage();
 
-getStoredUserData().then(userData => {
-  if (userData && userData.token) {
-    State.setState(userData);
-  }
-  const strState = JSON.stringify(State.getState());
-  console.log(`State: ${strState}`);
-});
+// getStoredUserData().then(userData => {
+//   if (userData && userData.token) {
+//     State.setState(userData);
+//   }
+//   const strState = JSON.stringify(State.getState());
+//   console.log(`State: ${strState}`);
+// });

@@ -38,7 +38,8 @@ export function promptFirebaseAuth() {
         resolve(userData);
       })
       .catch(function(error) {
-        console.error('FAILED LOGIN WITH GITHUB');
+        // console.error('FAILED LOGIN WITH GITHUB');
+
         reject({
           errorCode: error.code,
           errorMessage: error.message,

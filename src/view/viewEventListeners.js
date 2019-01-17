@@ -1,4 +1,4 @@
-/* global  VIEW_PROMPT_AUTH FORM_SUBMISSION  */
+/* global  VIEW_PROMPT_AUTH FORM_SUBMISSION renderIssueScreen */
 
 // eslint-disable-next-line
 function onDocumentLoaded() {
@@ -22,14 +22,22 @@ function registerViewEventListeners() {
   const loginButtonElement = document.getElementById('login-github-btn');
   loginButtonElement.addEventListener('click', authenticateUser);
 
-  // FIX
-  // const addIssueBtn = document.getElementById('add-issue');
-  // addIssueBtn.addEventListener('submit', submitIssue);
+  const addIssueBtn = document.querySelector('.issue-form-button');
+  addIssueBtn.addEventListener('click', submitIssue);
 }
 
 function registerChromeMessageListeners() {
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    console.log(`RECEIVED REQUEST: ${request}`);
+    console.log(request);
+    renderIssueScreen();
+    // if (request.messageType.BG_LOGIN_SUCCESS) {
+    //   console.log('RENDERING ISSUE SCREEN');
+    //   const issueScreenElement = document.getElementById('issue-screen');
+    //   console.log(issueScreenElement);
+    //   console.log('will be null');
+
+    //   renderIssueScreen();
+    // }
   });
 }
 
