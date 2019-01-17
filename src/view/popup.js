@@ -1,8 +1,13 @@
+import * as messageType from '../messageTypeConstants.js';
+
 function isUserLoggedIn() {
   return new Promise((resolve, reject) => {
-    chrome.runtime.sendMessage({ messageType: 'isLoggedIn' }, loggedInState => {
-      resolve(loggedInState.loggedIn);
-    });
+    chrome.runtime.sendMessage(
+      { messageType: messageType.VIEW_IS_LOGGED_IN },
+      ({ loginState }) => {
+        loginState ? resolve({ loginState }) : reject({ loginState });
+      }
+    );
   });
 }
 
@@ -32,9 +37,12 @@ function renderIssueScreen() {
 
 function authenticateUser() {
   console.log('button pressed login');
-  chrome.runtime.sendMessage({ messageType: 'authenticateUser' }, response => {
-    console.log(response);
-  });
+  chrome.runtime.sendMessage(
+    { messageType: messageType.VIEW_PROMPT_AUTH },
+    response => {
+      console.log(response);
+    }
+  );
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
