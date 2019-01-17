@@ -21,3 +21,19 @@ export function makeQuery(token, mutation, opts = {}) {
     return response.json();
   });
 }
+
+export function createJsPlaygroundIssue(token, title, body) {
+  const mutation = `mutation {
+    createIssue(input: {
+      assigneeIds: "MDQ6VXNlcjczNjQ4MDA=",
+      labelIds: "MDU6TGFiZWwzMTgxMjg3NzA=",
+      projectIds: "MDc6UHJvamVjdDIwNzU3MDc=",
+      repositoryId: "MDEwOlJlcG9zaXRvcnk1MDYwNDk5Nw==",
+      title: "${title}"
+    }) {
+      clientMutationId
+    }
+  }`;
+
+  return makeQuery(token, mutation, { preview: true });
+}

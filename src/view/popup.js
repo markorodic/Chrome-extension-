@@ -11,10 +11,11 @@ function isUserLoggedIn() {
 }
 
 isUserLoggedIn().then(loggedIn => {
-  if (loggedIn) {
-    renderLoginScreen();
-  } else {
+  console.log(loggedIn);
+  if (loggedIn.loginState) {
     renderIssueScreen();
+  } else {
+    renderLoginScreen();
   }
 });
 
@@ -25,27 +26,27 @@ function renderLoginScreen() {
 
   loginScreenElement.classList.remove('hidden');
   issueScreenElement.classList.add('hidden');
-  issueScreenElement.classList.add('hidden');
+  postSuccessScreen.classList.add('hidden');
 }
 
 function renderIssueScreen() {
   const loginScreenElement = document.getElementById('login-screen');
   const issueScreenElement = document.getElementById('issue-screen');
-  const issueScreenElement = document.getElementById('post-success-screen');
+  const postSuccessScreen = document.getElementById('post-success-screen');
 
   loginScreenElement.classList.add('hidden');
   issueScreenElement.classList.remove('hidden');
-  issueScreenElement.classList.add('hidden');
+  postSuccessScreen.classList.add('hidden');
 }
 
 function renderSuccessScreen() {
   const loginScreenElement = document.getElementById('login-screen');
   const issueScreenElement = document.getElementById('issue-screen');
-  const issueScreenElement = document.getElementById('post-success-screen');
+  const postSuccessScreen = document.getElementById('post-success-screen');
 
   loginScreenElement.classList.add('hidden');
   issueScreenElement.classList.add('hidden');
-  issueScreenElement.classList.remove('hidden');
+  postSuccessScreen.classList.remove('hidden');
 }
 
 function authenticateUser() {
@@ -77,6 +78,6 @@ function onDocumentLoaded() {
 
 function registerPopupListeners() {
   console.log('firing register listeners');
-  const loginButtonElement = document.getElementById('login-btn');
+  const loginButtonElement = document.getElementById('login-github-btn');
   loginButtonElement.addEventListener('click', authenticateUser);
 }

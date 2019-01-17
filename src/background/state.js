@@ -22,7 +22,7 @@ export function initState() {
   function setState(userData = {}) {
     const newState = {};
     for (let key in state) {
-      if (userData.key) {
+      if (userData[key]) {
         newState[key] = userData[key];
       } else {
         newState[key] = state[key];

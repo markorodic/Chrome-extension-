@@ -1,6 +1,7 @@
 import { promptFirebaseAuth } from './authentication.js';
 import { setStoredUserData } from './storage.js';
 import * as messageType from '../messageTypeConstants.js';
+import { createJsPlaygroundIssue } from './api/api.js';
 
 export function initBackgroundListeners(State) {
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -12,14 +13,14 @@ export function initBackgroundListeners(State) {
         });
         break;
 
-      case messageType.VIEW_AUTHENTICATE_USER:
+      case messageType.VIEW_PROMPT_AUTH:
         sendResponse({ messageType: messageType.BG_LOGIN_PENDING });
         authenticateUser();
         break;
 
       case messageType.FORM_SUBMISSION:
         sendResponse('form submission message receieved');
-        submitIssue(request.formData);
+        submitIssue(State, request.formData);
         break;
 
       default:
@@ -29,8 +30,11 @@ export function initBackgroundListeners(State) {
   });
 }
 
-function submitIssue(formData) {
-  console.log(formData);
+function submitIssue(State, formData) {
+  const { title, body } = formData;
+  const { token } = State.getState();
+  console.log(`making GH query: ${title} - ${body}`);
+  createJsPlaygroundIssue(token, title, body);
 }
 
 function authenticateUser() {

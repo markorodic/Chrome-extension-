@@ -37,7 +37,7 @@
         <h1><b>Issue Poster</b> for GitHub</h1>
       </div>
       <div class="issue-body">
-        <form id="add-issue">
+        <div id="add-issue">
           <div class="issue-step-one">
             <h2 class="issue-step-one-title">Choose a repository</h2>
             <div class="select-container">
@@ -106,7 +106,7 @@
               Post Issue
             </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
     <div id="post-success-screen">
@@ -117,13 +117,6 @@
       <div class="post-success-body">
         <h2 class="post-success-title">You've submitted your issue! 👍</h2>
       </div>
-      <script>
-        function mySubmitFunction(e) {
-          e.preventDefault();
-          console.log(e);
-          return false;
-        }
-      </script>
     </div>
   </body>
 </html>

@@ -16,6 +16,7 @@ initBackgroundListeners(State);
 // clearLocalStorage();
 
 getStoredUserData().then(userData => {
+  console.log(userData);
   console.log(State.getState());
   if (userData && userData.token) {
     State.setState(userData);
