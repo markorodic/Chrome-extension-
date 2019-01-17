@@ -1,5 +1,3 @@
-import * as messageType from '../messageTypeConstants.js';
-
 function isUserLoggedIn() {
   return new Promise((resolve, reject) => {
     chrome.runtime.sendMessage(
