@@ -72,6 +72,7 @@ function submitIssue(event) {
       console.log(response);
     }
   );
+  renderSuccessScreen();
 
   return false;
 }
