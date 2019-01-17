@@ -1,7 +1,8 @@
+/* global VIEW_IS_LOGGED_IN, VIEW_PROMPT_AUTH */
 function isUserLoggedIn() {
   return new Promise((resolve, reject) => {
     chrome.runtime.sendMessage(
-      { messageType: messageType.VIEW_IS_LOGGED_IN },
+      { messageType: VIEW_IS_LOGGED_IN },
       ({ loginState }) => {
         loginState ? resolve({ loginState }) : reject({ loginState });
       }
@@ -35,21 +36,18 @@ function renderIssueScreen() {
 
 function authenticateUser() {
   console.log('button pressed login');
-  chrome.runtime.sendMessage(
-    { messageType: messageType.VIEW_PROMPT_AUTH },
-    response => {
-      console.log(response);
-    }
-  );
+  chrome.runtime.sendMessage({ messageType: VIEW_PROMPT_AUTH }, response => {
+    console.log(response);
+  });
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log(request);
 });
 
-registerDocumentEventListeners();
+onDocumentLoaded();
 
-function registerDocumentEventListeners() {
+function onDocumentLoaded() {
   if (
     document.attachEvent
       ? document.readyState === 'complete'
@@ -58,13 +56,13 @@ function registerDocumentEventListeners() {
     console.log('dom was loaded');
     registerPopupListeners();
   } else {
+    console.log('DOM content has not yet been loaded');
     document.addEventListener('DOMContentLoaded', registerPopupListeners);
   }
 }
 
 function registerPopupListeners() {
+  console.log('firing register listeners');
   const loginButtonElement = document.getElementById('login-btn');
-  const test = document.querySelector('#login-btn');
-  console.log(loginButtonElement, test);
   loginButtonElement.addEventListener('click', authenticateUser);
 }

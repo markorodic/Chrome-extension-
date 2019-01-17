@@ -18,6 +18,7 @@ function authenticate() {
 window.addEventListener('load', function(evt) {
   console.log(document.getElementById('login-github-btn'));
   // document.getElementById('add-issue').addEventListener('submit', addIssue);
-  document.getElementById('login-github-btn').addEventListener('click', authenticate);
-  });
+  document
+    .getElementById('login-github-btn')
+    .addEventListener('click', authenticate);
 });
